@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>edScape</title>
+    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+  </head>
+  <body>
+    <a-scene id="welcome-scene">
+      <a-assets>
+        <audio id="welcome-sound" src="sounds/voice/welcome.mp3" preload>
+        <audio id="intro-html-sound" src="sounds/voice/intro-html.mp3" preload>
+        <img id="mic-img" src="images/mic.jpg">
+        <img id="intro-html-img" src="images/intro-html.jpg">
+      </a-assets>
+
+
+      <a-entity position="0 0 0">
+        <a-camera>
+          <a-cursor></a-cursor>
+        </a-camera>
+      </a-entity>
+
+      <!-- welcome-entity -->
+      <a-entity id="welcome-entity">
+        <a-sky id="sky" color="#2e3d49"></a-sky>
+
+        <a-entity position="-1.6 2 -4" material="color: #02b3e4"
+                   text="text: edScapeVR">
+        </a-entity>
+
+        <a-box class="voice-command-box" position="3 3 -4" scale="0.5 0.5 0.5" src="#mic-img">
+          <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
+        </a-box>
+
+        <a-entity position="-1.4 1.4 -4" rotation="0 0 0" scale="0.5 0.5 0.5"
+               material="color: #525c65" text="text: Courses">
+        </a-entity>
+
+        <a-plane color="#fff" position="0.6 0.2 -4" height="2" width="4">
+          <a-entity position="-1.6 0.5 1" rotation="0 0 0" scale="0.2 0.2 0.2"
+                 material="color: #212121" text="text: Intro to HTML">
+          </a-entity>
+          <a-box id="intro-html-box" src="#intro-html-img" position="-1.4 0 1" scale="0.4 0.4 0.4">
+            <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
+          </a-box>
+        </a-plane>
+      </a-entity>
+
+      <!-- end welcome entity -->
+
+      <!-- start course entity -->
+
+      <a-entity id="course-entity" visible="false"></a-entity>
+
+      <!-- end course entity -->
+
+    </a-scene>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/voice-command.js"></script>
+  </body>
+</html>
