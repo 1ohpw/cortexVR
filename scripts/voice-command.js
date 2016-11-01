@@ -1,21 +1,26 @@
-var voiceCommandBoxes = document.getElementsByClassName('voice-command-box');
+var openCourseSound = new Howl({
+  src: ['sounds/voice/intro-html.mp3'],
+  onend: openIntroHtml
+});
 
-var voiceCommandBox;
-for(i=0; i < voiceCommandBoxes.length; i++) {
-  voiceCommandBox = voiceCommandBoxes.item(i);
-  voiceCommandBox.addEventListener('click', startVoiceCommand);
-}
+welcomeSound = new Howl({
+  src: ['sounds/voice/welcome-intro.mp3'],
+});
+
+var voiceCommandBox = document.getElementById('voice-box');
+voiceCommandBox.addEventListener('click', startVoiceCommand);
+
 
 
 function startVoiceCommand() {
   if (annyang) {
     var commands = {
-      'hello': function() {document.getElementById('welcome-sound').play();},
+      'hello': function() {welcomeSound.play();},
 
       'open course *course': function(course) {
         console.log(course);
         if(course == 'intro to HTML') {
-          document.getElementById('intro-html-sound').play();
+          openCourseSound.play();
         }
       }
     };
@@ -24,4 +29,9 @@ function startVoiceCommand() {
 
     annyang.start({autoRestart: false});
   }
+}
+
+function openIntroHtml() {
+  document.getElementById('welcome-entity').setAttribute('visible', 'false');
+  document.getElementById('course-entity').setAttribute('visible', 'true');
 }

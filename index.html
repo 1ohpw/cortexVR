@@ -5,57 +5,120 @@
     <title>edScape</title>
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.1/howler.core.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   </head>
   <body>
-    <a-scene id="welcome-scene">
+    <a-scene id="scene">
       <a-assets>
-        <audio id="welcome-sound" src="sounds/voice/welcome.mp3" preload>
-        <audio id="intro-html-sound" src="sounds/voice/intro-html.mp3" preload>
         <img id="mic-img" src="images/mic.jpg">
         <img id="intro-html-img" src="images/intro-html.jpg">
+        <img id="stars" src="images/stars.jpg">
+        <video id="intro-html-vid" src="videos/lecture.mp4">
       </a-assets>
 
 
       <a-entity position="0 0 0">
         <a-camera>
-          <a-cursor></a-cursor>
+          <a-cursor color="#f44336"></a-cursor>
         </a-camera>
       </a-entity>
 
-      <!-- welcome-entity -->
-      <a-entity id="welcome-entity">
-        <a-sky id="sky" color="#2e3d49"></a-sky>
+      <!-- nav -->
 
-        <a-entity position="-1.6 2 -4" material="color: #02b3e4"
+      <a-box id="voice-box" src="#mic-img" position="0 0.4 -4"
+              visible="false">
+        <a-animation begin="mouseenter" attribute="rotation" dur="1000"
+                      to="0 360 0">
+        </a-animation>
+      </a-box>
+      <a-sphere id="welcome-sphere" color="#fff" position="0 2 -4"
+              scale="0.2 0.2 0.2" visible="false"></a-sphere>
+      <a-entity id="welcome-sphere-text" position="-4 -20 -40" material="color: #d32f2f" scale="8 8 8"
+                  visible="false" text="text: Welcome">
+       </a-entity>
+
+      <!-- welcome-entity -->
+      <a-entity class="partial" id="welcome-entity">
+        <a-sky color="#000" rotation="0 -90 0"></a-sky>
+
+       <a-entity id="title" position="-3.8 1 -6" material="color: #d32f2f" scale="2 2 4"
                    text="text: edScapeVR">
         </a-entity>
 
-        <a-box class="voice-command-box" position="3 3 -4" scale="0.5 0.5 0.5" src="#mic-img">
-          <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
+        <a-box id="intro-html-box" src="#intro-html-img" position="0 1 -4"
+                   visible="false">
         </a-box>
-
-        <a-entity position="-1.4 1.4 -4" rotation="0 0 0" scale="0.5 0.5 0.5"
-               material="color: #525c65" text="text: Courses">
-        </a-entity>
-
-        <a-plane color="#fff" position="0.6 0.2 -4" height="2" width="4">
-          <a-entity position="-1.6 0.5 1" rotation="0 0 0" scale="0.2 0.2 0.2"
-                 material="color: #212121" text="text: Intro to HTML">
-          </a-entity>
-          <a-box id="intro-html-box" src="#intro-html-img" position="-1.4 0 1" scale="0.4 0.4 0.4">
-            <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
-          </a-box>
-        </a-plane>
       </a-entity>
 
       <!-- end welcome entity -->
 
-      <!-- start course entity -->
+      <!-- start intro-html course entity -->
 
-      <a-entity id="course-entity" visible="false"></a-entity>
+      <a-entity class="partial" id="course-entity" visible="false">
+        <a-sky id="sky" color="#2e3d49"></a-sky>
+
+        <a-entity position="-3.4 4 -8" rotation="0 0 0" scale="2 2 2"
+               material="color: #fff" text="text: Intro to HTML">
+        </a-entity>
+
+        <a-entity position="-8 2 -1.5" rotation="0 90 0"
+               material="color: #212121" text="text: Reading">
+        </a-entity>
+        <a-box position="-8 1 -2.4" id="intro-html-reading" color="#212121">
+          <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
+        </a-box>
+
+        <a-entity position="-1 2 -8" rotation="0 0 0"
+               material="color: #02b3e4" text="text: Lecture">
+        </a-entity>
+        <a-box position="0 1 -8" id="intro-html-theater" color="#02b3e4">
+          <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
+        </a-box>
+
+        <a-entity position="8 2 -2.4" rotation="0 -90 0"
+               material="color: #616161" text="text: Quiz">
+        </a-entity>
+        <a-box position="8 1 -1.6" id="intro-html-quiz" color="#616161">
+          <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
+        </a-box>
+      </a-entity>
 
       <!-- end course entity -->
+
+      <!-- intro to html reading -->
+      <a-entity class="partial" id="reading-entity" visible="false">
+        <a-sky color="#2e3d49"></a-sky>
+
+        <!--HTML DOM Tree Structure-->
+        <a-box position="0 3 -4"></a-box>
+        <a-cylinder position="-1 2 -4" color="#212121" rotation="0 0 -45"
+                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
+        <a-cylinder position="1 2 -4" color="#212121" rotation="0 0 45"
+                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
+        <a-box position="-2 1 -4"></a-box>
+        <a-box position="2 1 -4"></a-box>
+        <a-cylinder position="1 0 -4" color="#212121" rotation="0 0 -45"
+                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
+        <a-cylinder position="3 0 -4" color="#212121" rotation="0 0 45"
+                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
+        <a-box position="3.4 -1 -4"></a-box>
+        <a-box position="0.4 -1 -4"></a-box>
+
+
+      </a-entity>
+
+      <!-- end intro to html reading -->
+
+      <!-- intro to html lecture -->
+      <a-entity class="partial" id="lecture-entity" visible="false">
+        <a-sky id="sky" color="#fff"></a-sky>
+
+        <a-video id="intro-html-lecture" width="16" height="8" position="0 0 -8"></a-video>
+      </a-entity>
+      <!-- end intro to html lecture -->
 
     </a-scene>
 
