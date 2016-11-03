@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/denzalereese/edscape#readme",
   "dependencies": {
-    "aframe": "^0.3.2"
+    "aframe": "^0.3.2",
+    "express": "^4.14.0"
   }
 }
