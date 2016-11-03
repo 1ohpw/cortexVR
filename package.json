@@ -1,6 +1,6 @@
 {
   "name": "edscape",
-  "version": "6.6.0",
+  "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
