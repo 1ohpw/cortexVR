@@ -58,6 +58,13 @@ window.onload = function() {
       src: ['sounds/voice/html-dom-tree.mp3']
     });
 
+    var theaterSound = new Howl({
+      src: ['sounds/voice/theater.mp3'],
+      onend: function() {
+        document.getElementById('intro-html-vid').play();
+      }
+    });
+
     welcomeSound.play();
 
     document.getElementById('intro-html-box').addEventListener('click', function() {
@@ -76,7 +83,9 @@ window.onload = function() {
 
     document.getElementById('theater-entity').setAttribute('visible', 'true');
     document.getElementById('intro-html-lecture').setAttribute('src', '#intro-html-vid');
-    document.getElementById('intro-html-vid').play();
+
+    theaterSound.play();
+
     });
 
     document.getElementById('intro-html-explore').addEventListener('click', function() {
@@ -91,6 +100,14 @@ window.onload = function() {
 
     document.getElementById('html-dom-info').addEventListener('click', function() {
       htmlDomTreeSound.play();
+    });
+
+    document.getElementById('pause-box').addEventListener('click', function() {
+      document.getElementById('intro-html-vid').pause();
+    });
+
+    document.getElementById('play-box').addEventListener('click', function() {
+      document.getElementById('intro-html-vid').play();
     });
 
     //Nav
@@ -114,6 +131,8 @@ window.onload = function() {
 
       document.getElementById('course-entity').setAttribute('visible', 'true');
     });
+
+
 
     function setUpNavBar() {
       document.getElementById('welcome-synapse').addEventListener('mouseenter', function() {

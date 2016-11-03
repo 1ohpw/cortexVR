@@ -1,3 +1,5 @@
+var partials = document.getElementsByClassName('partial');
+
 var openCourseSound = new Howl({
   src: ['sounds/voice/intro-html.mp3'],
   onend: openIntroHtml
@@ -5,6 +7,22 @@ var openCourseSound = new Howl({
 
 welcomeSound = new Howl({
   src: ['sounds/voice/welcome-intro.mp3'],
+});
+
+var theaterSound = new Howl({
+  src: ['sounds/voice/theater.mp3'],
+  onend: function() {
+    for(i = 0; i < partials.length; i++) {
+      if(partials[i].id != "theater-entity") {
+        partials[i].setAttribute('visible', 'false');
+      }
+    }
+
+    document.getElementById('theater-entity').setAttribute('visible', 'true');
+
+    document.getElementById('intro-html-lecture').setAttribute('src', '#intro-html-vid');
+    document.getElementById('intro-html-vid').play();
+  }
 });
 
 var voiceCommandBox = document.getElementById('voice-box');
@@ -22,6 +40,10 @@ function startVoiceCommand() {
         if(course == 'intro to HTML') {
           openCourseSound.play();
         }
+      },
+
+      'theater': function() {
+        theaterSound.play();
       }
     };
 
