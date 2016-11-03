@@ -2,11 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>edScape</title>
+    <title>cortexVR</title>
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
-    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.1/howler.core.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   </head>
@@ -15,8 +14,16 @@
       <a-assets>
         <img id="mic-img" src="images/mic.jpg">
         <img id="intro-html-img" src="images/intro-html.jpg">
-        <img id="stars" src="images/stars.jpg">
-        <video id="intro-html-vid" src="videos/lecture.mp4">
+        <img id="theater-img" src="images/theater.jpg">
+        <img id="quiz-img" src="images/quiz.jpg">
+        <img id="explore-img" src="images/explore.jpg">
+        <img id="class-img" src="images/class.jpg">
+        <img id="stars-theater" src="images/stars-theater.jpg">
+        <img id="html-code" src="images/html-code.jpg">
+        <img id="html-page" src="images/html-page.jpg">
+        <video id="intro-html-vid" src="videos/lecture.mp4" preload>
+        <a-asset-item id="couch-obj" src="models/couch/couch.obj" preload>
+        <a-asset-item id="couch-mtl" src="models/couch/couch.mtl" preload>
       </a-assets>
 
 
@@ -30,22 +37,24 @@
 
       <a-box id="voice-box" src="#mic-img" position="0 0.4 -4"
               visible="false">
-        <a-animation begin="mouseenter" attribute="rotation" dur="1000"
-                      to="0 360 0">
-        </a-animation>
       </a-box>
-      <a-sphere id="welcome-sphere" color="#fff" position="0 2 -4"
+      <a-sphere id="welcome-synapse" color="#fff" position="-0.5 2 -4"
               scale="0.2 0.2 0.2" visible="false"></a-sphere>
-      <a-entity id="welcome-sphere-text" position="-4 -20 -40" material="color: #d32f2f" scale="8 8 8"
+      <a-entity id="welcome-synapse-text" position="-4 -20 -40" material="color: #d32f2f" scale="8 8 8"
                   visible="false" text="text: Welcome">
+      </a-entity>
+      <a-sphere id="course-synapse" color="#fff" position="0.5 2 -4"
+              scale="0.2 0.2 0.2" visible="false"></a-sphere>
+      <a-entity id="course-synapse-text" position="-4 -20 -40" material="color: #d32f2f" scale="8 8 8"
+                  visible="false" text="text: Course Lobe">
        </a-entity>
 
       <!-- welcome-entity -->
       <a-entity class="partial" id="welcome-entity">
         <a-sky color="#000" rotation="0 -90 0"></a-sky>
 
-       <a-entity id="title" position="-3.8 1 -6" material="color: #d32f2f" scale="2 2 4"
-                   text="text: edScapeVR">
+       <a-entity id="title" position="-3.9 1 -6" material="color: #d32f2f" scale="3 3 4"
+                   text="text: cortexVR">
         </a-entity>
 
         <a-box id="intro-html-box" src="#intro-html-img" position="0 1 -4"
@@ -58,67 +67,84 @@
       <!-- start intro-html course entity -->
 
       <a-entity class="partial" id="course-entity" visible="false">
-        <a-sky id="sky" color="#2e3d49"></a-sky>
+        <a-sky color="#000"></a-sky>
 
         <a-entity position="-3.4 4 -8" rotation="0 0 0" scale="2 2 2"
-               material="color: #fff" text="text: Intro to HTML">
+               material="color: #d32f2f" text="text: Intro to HTML">
         </a-entity>
 
         <a-entity position="-8 2 -1.5" rotation="0 90 0"
-               material="color: #212121" text="text: Reading">
+               material="color: #d32f2f" text="text: Explore">
         </a-entity>
-        <a-box position="-8 1 -2.4" id="intro-html-reading" color="#212121">
+        <a-box position="-8 1 -2.4" id="intro-html-explore" src="#explore-img">
           <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
         </a-box>
 
         <a-entity position="-1 2 -8" rotation="0 0 0"
-               material="color: #02b3e4" text="text: Lecture">
+               material="color: #d32f2f" text="text: Theater">
         </a-entity>
-        <a-box position="0 1 -8" id="intro-html-theater" color="#02b3e4">
+        <a-box position="0 1 -8" id="intro-html-theater" src="#theater-img">
           <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
         </a-box>
 
-        <a-entity position="8 2 -2.4" rotation="0 -90 0"
-               material="color: #616161" text="text: Quiz">
+        <a-entity position="8 2 -2.4" rotation="0 -90 0" scale="1.2 1.2 1.2"
+               material="color: #d32f2f" text="text: Quiz">
         </a-entity>
-        <a-box position="8 1 -1.6" id="intro-html-quiz" color="#616161">
+        <a-box position="8 1 -1.6" id="intro-html-quiz" src="#quiz-img">
           <a-animation begin="mouseenter" attribute="rotation" to="360 360 0"></a-animation>
         </a-box>
       </a-entity>
 
       <!-- end course entity -->
 
-      <!-- intro to html reading -->
-      <a-entity class="partial" id="reading-entity" visible="false">
-        <a-sky color="#2e3d49"></a-sky>
+      <!-- intro to html explore -->
+      <a-entity class="partial" id="explore-entity" visible="false">
+        <a-sky color="#000"></a-sky>
 
-        <!--HTML DOM Tree Structure-->
-        <a-box position="0 3 -4"></a-box>
-        <a-cylinder position="-1 2 -4" color="#212121" rotation="0 0 -45"
-                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
-        <a-cylinder position="1 2 -4" color="#212121" rotation="0 0 45"
-                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
-        <a-box position="-2 1 -4"></a-box>
-        <a-box position="2 1 -4"></a-box>
-        <a-cylinder position="1 0 -4" color="#212121" rotation="0 0 -45"
-                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
-        <a-cylinder position="3 0 -4" color="#212121" rotation="0 0 45"
-                    height="8" scale="0.2 0.2 0.2"></a-cylinder>
-        <a-box position="3.4 -1 -4"></a-box>
-        <a-box position="0.4 -1 -4"></a-box>
+        <a-curvedimage position="-1.6 2 2" rotation="0 -120 0" height="4" radius="2" theta-length="180" src="#html-code"></a-curvedimage>
 
+        <!-- HTML DOM Tree Structure -->
+        <a-entity position="0 4 -4" scale="4 4 4">
+          <a-box class="html-dom-box" color="#fff" position="0 3 -4">
+            <a-entity position="-0.4 -0.4 1" material="color: #000" text="text: <html>" scale="0.4 0.4 0.4"></a-entity>
+          </a-box>
+          <a-sphere id="html-dom-info" position="2 3 -4" color="#d32f2f" scale="0.4 0.4 0.4"></a-sphere>
+          <a-cylinder position="-1 2 -4" color="#d32f2f" rotation="0 0 -45"
+                      height="8" scale="0.2 0.2 0.2"></a-cylinder>
+          <a-cylinder position="1 2 -4" color="#d32f2f" rotation="0 0 45"
+                      height="8" scale="0.2 0.2 0.2"></a-cylinder>
+          <a-box class="html-dom-box" color="#fff" position="-2 1 -4">
+            <a-entity position="-0.2 -0.2 1" material="color: #000" text="text: <head>" scale="0.3 0.3 0.3"></a-entity>
+          </a-box>
+          <a-box class="html-dom-box" color="#fff" position="2 1 -4">
+            <a-entity position="-0.64 -0.3 1" material="color: #000" text="text: <body>" scale="0.3 0.3 0.3"></a-entity>
+          </a-box>
+          <a-cylinder position="1 0 -4" color="#d32f2f" rotation="0 0 -45"
+                      height="8" scale="0.2 0.2 0.2"></a-cylinder>
+          <a-cylinder position="3 0 -4" color="#d32f2f" rotation="0 0 45"
+                      height="8" scale="0.2 0.2 0.2"></a-cylinder>
+          <a-box class="html-dom-box" color="#fff" position="0.4 -0.4 -4">
+            <a-entity position="-0.44 -0.1 1" material="color: #000" text="text: <h1>" scale="0.4 0.4 0.4"></a-entity>
+          </a-box>
+          <a-box class="html-dom-box" color="#fff" position="3.4 -1 -4">
+            <a-entity position="-0.6 0 1" material="color: #000" text="text: <p>" scale="0.5 0.5 0.5"></a-entity>
+          </a-box>
+        </a-entity>
+
+        <a-curvedimage position="1.6 2 2" rotation="0 -40 0" height="4" radius="2" theta-length="180" src="#html-page"></a-curvedimage>
 
       </a-entity>
 
-      <!-- end intro to html reading -->
+      <!-- end intro to html explore -->
 
-      <!-- intro to html lecture -->
-      <a-entity class="partial" id="lecture-entity" visible="false">
-        <a-sky id="sky" color="#fff"></a-sky>
-
-        <a-video id="intro-html-lecture" width="16" height="8" position="0 0 -8"></a-video>
+      <!-- intro to html theater -->
+      <a-entity class="partial" id="theater-entity" visible="false">
+        <a-sky src="#stars-theater" rotation="70 0 0 "></a-sky>
+        <a-video id="intro-html-lecture" width="40" height="20" position="0 1 -24"></a-video>
+        <a-obj-model src="#couch-obj" mtl="#couch-mtl" rotation="0 180 0" position="0 -2 1"></a-obj-model>
+        <a-plane color="#000" height="1000" width="1000" position="0 -60 0" rotation="-90 90 0"></a-plane>
       </a-entity>
-      <!-- end intro to html lecture -->
+      <!-- end intro to html theater -->
 
     </a-scene>
 
